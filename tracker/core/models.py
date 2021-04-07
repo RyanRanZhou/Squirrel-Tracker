@@ -19,14 +19,3 @@ class Sighting(models.Model):
 
     above_ground = models.IntegerField()
 
-    class Shift(models.IntegerChoices):
-        A_M_ = 0
-        P_M_ = 1
-
-    class Age(models.IntegerChoices):
-        ADULT = 0
-        JUVENILE = 1
-        UNKNOWN = 2
-
-    shift = models.SmallIntegerField(choices=Shift.choices)
-    age = models.SmallIntegerField(choices=Age.choices)
