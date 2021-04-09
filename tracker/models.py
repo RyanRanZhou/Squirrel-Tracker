@@ -70,7 +70,7 @@ class Sighting(models.Model):
     color_notes = models.TextField(blank=True)
 
     
-    above_ground_sighter_measurement = models.CharField(max_length=10,blank=True)
+    above_ground = models.IntegerField(default=0,blank=True,null=True)
     specific_location = models.CharField(max_length=100,blank=True)
     other_activity = models.CharField(max_length=100,blank=True)
     other_interaction = models.CharField(max_length=200,blank=True)

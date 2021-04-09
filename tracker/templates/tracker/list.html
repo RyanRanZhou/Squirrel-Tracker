@@ -20,7 +20,7 @@
     <table data-toggle="table">
         <thead>
             <tr>
-                <th data-align="center">ID</th>
+                <th data-align="center">Squirrel ID</th>
                 <th data-align="center">Lat</th>
                 <th data-align="center">Lon</th>
                 <th data-align="center" data-sortable="true">Date</th>
@@ -32,7 +32,7 @@
             {% for sighting in sightings %}
             <tr>
                 <td>
-                    <a href="/sightings/{{ sighting.id }}/">{{ sighting.id }}</a>
+                    <a href="/sightings/{{ sighting.squirrel_id }}/">{{ sighting.squirrel_id }}</a>
                 </td>
                 <td>{{ sighting.latitude }}</td>
                 <td>{{ sighting.longitude }}</td>
