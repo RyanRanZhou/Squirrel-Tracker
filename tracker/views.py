@@ -3,6 +3,8 @@ from django.views.generic import TemplateView
 from django.db.models import Sum, Count
 from .models import Sighting
 from django.shortcuts import get_object_or_404
+from .forms import AddSightingForm, UpdateSightingForm
+from django.http import HttpResponse,JsonResponse
 
 def home(request):
 
@@ -28,17 +30,31 @@ class ListView(TemplateView):
 
 
 def add(request):
-
-    return render(request, 'tracker/add.html', {})
+    context = {}
+    form = AddSightingForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    context['form'] = form
+    return render(request, 'tracker/add.html', context)
 
 
 def detail(request, squirrel_id):
-    squirrel = get_object_or_404(Sighting, pk = squirrel_id)
-
+    sighting = get_object_or_404(Sighting, pk = squirrel_id)
     context = {
-            'squirrel':squirrel,
+            'sighting':sighting,
     }
     return render(request, 'tracker/detail.html', context)
+
+def update(request, squirrel_id):
+    obj = get_object_or_404(Sighting, pk = squirrel_id)
+    form = UpdateSightingForm(request.POST or None, instance = obj)
+    if form.is_valid():
+        form.save()
+        return JsonResponse({"Update Saved"})
+    context = {
+            'form': form,
+    }
+    return render(request, 'tracker/update.html', context)
 
 class StatsView(TemplateView):
     template_name = 'tracker/stats.html'

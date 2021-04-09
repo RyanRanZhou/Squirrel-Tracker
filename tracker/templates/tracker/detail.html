@@ -1,4 +1,7 @@
 <!doctype html>
 <html lang="en">
-        <body>detail</body>
+        <body>
+	  {{ sighting.squirrel_id }}
+	 <a href="{% url 'tracker:update' sighting.squirrel_id%}">update sighting</a>
+	</body>
 </html>
