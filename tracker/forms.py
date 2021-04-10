@@ -44,7 +44,6 @@ class UpdateSightingForm(forms.ModelForm):
                 model = Sighting
                 # specify fields to be used
                 fields = [
-                        "squirrel_id",
                         "longitude",
                         "latitude",
                         "shift",

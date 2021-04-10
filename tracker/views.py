@@ -46,13 +46,14 @@ def detail(request, squirrel_id):
     return render(request, 'tracker/detail.html', context)
 
 def update(request, squirrel_id):
-    obj = get_object_or_404(Sighting, pk = squirrel_id)
-    form = UpdateSightingForm(request.POST or None, instance = obj)
+    sighting = get_object_or_404(Sighting, pk = squirrel_id)
+    form = UpdateSightingForm(request.POST or None, instance = sighting)
     if form.is_valid():
         form.save()
-        return JsonResponse({"Update Saved"})
+        return JsonResponse({'status': 'update saved'})
     context = {
             'form': form,
+            'sighting': sighting,
     }
     return render(request, 'tracker/update.html', context)
 

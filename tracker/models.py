@@ -9,7 +9,7 @@ class Sighting(models.Model):
     
     date = models.DateField()
     hectare = models.CharField(max_length=3)
-    count = models.IntegerField()
+    count = models.IntegerField(null=True)
 
     running = models.BooleanField()
     chasing = models.BooleanField()
