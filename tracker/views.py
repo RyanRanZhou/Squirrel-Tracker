@@ -34,6 +34,7 @@ def add(request):
     form = AddSightingForm(request.POST or None)
     if form.is_valid():
         form.save()
+        return HttpResponse("Sighting Saved!")
     context['form'] = form
     return render(request, 'tracker/add.html', context)
 
@@ -50,7 +51,7 @@ def update(request, squirrel_id):
     form = UpdateSightingForm(request.POST or None, instance = sighting)
     if form.is_valid():
         form.save()
-        return JsonResponse({'status': 'update saved'})
+        return HttpResponse('Update Saved!')
     context = {
             'form': form,
             'sighting': sighting,
@@ -65,27 +66,28 @@ class StatsView(TemplateView):
 
         context['hectare_stats'] = Sighting.objects.values(
             'hectare').annotate(Count('count'))
-
+        
         age_stats = Sighting.objects.values('age').annotate(Count('count'))
-        total = sum([stat['count__count'] for stat in age_stats])
+        total = sum([stat['count__count'] for stat in Sighting.objects.values('hectare').annotate(Count('count'))])
         context['age_stats'] = {
             'adult': age_stats[0]['count__count'] / total * 100 // 1,
             'juvenile': age_stats[1]['count__count'] / total * 100 // 1
         }
 
         context['run_stats'] = sum(
-            [a.count for a in Sighting.objects.filter(running=True)]) / total * 100 // 1
+            [1 for a in Sighting.objects.filter(running=True)]) / total * 100 // 1
         context['chase_stats'] = sum(
-            [a.count for a in Sighting.objects.filter(running=True)]) / total * 100 // 1
+            [1 for a in Sighting.objects.filter(chasing=True)]) / total * 100 // 1
         context['eat_stats'] = sum(
-            [a.count for a in Sighting.objects.filter(running=True)]) / total * 100 // 1
+            [1 for a in Sighting.objects.filter(eating=True)]) / total * 100 // 1
         context['climb_stats'] = sum(
-            [a.count for a in Sighting.objects.filter(climbing=True)]) / total * 100 // 1
-
+            [1 for a in Sighting.objects.filter(climbing=True)]) / total * 100 // 1
+        
         context['above_ground_stats'] = '[' + ','.join([
             '[%d, %d]' % (stat['above_ground'], stat['count__count']) for stat in
             Sighting.objects.filter(above_ground__gt=0).values(
                 'above_ground').annotate(Count('count'))
         ]) + ']'
+
         return context
 
