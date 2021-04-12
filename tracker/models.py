@@ -3,30 +3,10 @@ from django.utils.translation import gettext as _
 
 
 class Sighting(models.Model):
-    squirrel_id = models.CharField(max_length=14, primary_key=True)
-    latitude = models.FloatField()
     longitude = models.FloatField()
-    
-    date = models.DateField()
+    latitude = models.FloatField()
+    squirrel_id = models.CharField(max_length=14, primary_key=True)
     hectare = models.CharField(max_length=3)
-    count = models.IntegerField(null=True)
-
-    running = models.BooleanField()
-    chasing = models.BooleanField()
-    climbing = models.BooleanField()
-    eating = models.BooleanField()
-    foraging = models.BooleanField()
-    kuks = models.BooleanField()
-    quaas = models.BooleanField()
-    moans = models.BooleanField()
-    tail_flags = models.BooleanField()
-    tail_twitches = models.BooleanField()
-    approaches = models.BooleanField()
-    indifferent = models.BooleanField()
-    runs_from = models.BooleanField()
-    
-    
-
     AM = 'AM'
     PM = 'PM'
     SHIFT_CHOICES = [
@@ -36,7 +16,9 @@ class Sighting(models.Model):
     shift = models.CharField(
         choices=SHIFT_CHOICES,
         max_length=5
-        )
+        )   
+    date = models.DateField()
+    count = models.IntegerField(null=True)
 
     ADULT = 'Adult'
     JUVENILE = 'Juvenile'
@@ -51,6 +33,10 @@ class Sighting(models.Model):
         choices=AGE_CHOICES,
         max_length=10
     )
+    primary_fur_color = models.CharField(max_length=10, blank=True)
+    highlight_fur_color = models.CharField(max_length=50, blank=True)
+    combination_color = models.CharField(max_length=50, blank=True)
+    color_notes = models.TextField(blank=True)
 
     ABOVE_GROUND = 'Above Ground'
     GROUND_PLANE = 'Ground Plane'
@@ -63,16 +49,24 @@ class Sighting(models.Model):
         choices=LOCATION_CHOICES,
         max_length=15
     )
- 
-    primary_fur_color = models.CharField(max_length=10, blank=True)
-    highlight_fur_color = models.CharField(max_length=50, blank=True)
-    combination_color = models.CharField(max_length=50, blank=True)
-    color_notes = models.TextField(blank=True)
 
-    
     above_ground = models.IntegerField(default=0,blank=True,null=True)
     specific_location = models.CharField(max_length=100,blank=True)
+    
+    running = models.BooleanField()
+    chasing = models.BooleanField()
+    climbing = models.BooleanField()
+    eating = models.BooleanField()
+    foraging = models.BooleanField()
     other_activity = models.CharField(max_length=100,blank=True)
+    kuks = models.BooleanField()
+    quaas = models.BooleanField()
+    moans = models.BooleanField()
+    tail_flags = models.BooleanField()
+    tail_twitches = models.BooleanField()
+    approaches = models.BooleanField()
+    indifferent = models.BooleanField()
+    runs_from = models.BooleanField()
     other_interaction = models.CharField(max_length=200,blank=True)
     lat_long = models.CharField(max_length=50)
     
