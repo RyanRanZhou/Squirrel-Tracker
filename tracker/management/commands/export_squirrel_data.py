@@ -22,16 +22,14 @@ class Command(BaseCommand):
                               'Tail flags', 'Tail twitches', 'Approaches', 'Indifferent', 'Runs from', 'Other Interactions',
                              'Lat/Long'
                              ]
-                writer = csv.DictWriter(f, fieldnames = fieldnames)
-                writer.writeheader()
+                writer = csv.writer(f,delimiter=',')
+                writer.writerow(fieldnames)
                 fields = Sighting._meta.fields
                 for obj in Sighting.objects.all():
-                    row = ''
-                    i = 0
-                    dic = dict()
+                    row = list()
                     for field in fields:
-                        dic[fieldnames[i]] = getattr(obj, field.name)
-                    writer.writerow(dic)
+                        row.append(getattr(obj, field.name))
+                    writer.writerow(row)
                 f.close()
         except Exception as err:
             raise err
