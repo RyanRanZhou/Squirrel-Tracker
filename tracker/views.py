@@ -70,8 +70,8 @@ class StatsView(TemplateView):
         age_stats = Sighting.objects.values('age').annotate(Count('count'))
         total = sum([stat['count__count'] for stat in Sighting.objects.values('hectare').annotate(Count('count'))])
         context['age_stats'] = {
-            'adult': age_stats[0]['count__count'] / total * 100 // 1,
-            'juvenile': age_stats[1]['count__count'] / total * 100 // 1
+            'adult': age_stats.get(age='Adult')['count__count'] / total * 100 // 1,
+            'juvenile': age_stats.get(age='Juvenile')['count__count'] / total * 100 // 1
         }
 
         context['run_stats'] = sum(
@@ -83,11 +83,6 @@ class StatsView(TemplateView):
         context['climb_stats'] = sum(
             [1 for a in Sighting.objects.filter(climbing=True)]) / total * 100 // 1
         
-        context['above_ground_stats'] = '[' + ','.join([
-            '[%d, %d]' % (stat['above_ground'], stat['count__count']) for stat in
-            Sighting.objects.filter(above_ground__gt=0).values(
-                'above_ground').annotate(Count('count'))
-        ]) + ']'
 
         return context
 
