@@ -51,14 +51,14 @@ class Sighting(models.Model):
     )
 
     above_ground = models.IntegerField(default=0,blank=True,null=True)
-    specific_location = models.CharField(max_length=100,blank=True)
+    specific_location = models.TextField(blank=True)
     
     running = models.BooleanField()
     chasing = models.BooleanField()
     climbing = models.BooleanField()
     eating = models.BooleanField()
     foraging = models.BooleanField()
-    other_activity = models.CharField(max_length=100,blank=True)
+    other_activity = models.TextField(blank=True)
     kuks = models.BooleanField()
     quaas = models.BooleanField()
     moans = models.BooleanField()
@@ -67,7 +67,7 @@ class Sighting(models.Model):
     approaches = models.BooleanField()
     indifferent = models.BooleanField()
     runs_from = models.BooleanField()
-    other_interaction = models.CharField(max_length=200,blank=True)
+    other_interaction = models.TextField(blank=True)
     lat_long = models.CharField(max_length=50)
     
     def __str__(self):

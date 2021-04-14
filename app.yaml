@@ -1,0 +1,19 @@
+runtime: python37
+
+handlers:
+    # This configures Google App Engine to serve the files in the app's
+    # static directory.
+     - url: /static
+       static_dir: static
+
+     - url: /.*
+       script: auto
+
+env_variables:
+    INSTANCE_CONNECTION_NAME: 'smiling-audio-307012:asia-east2:squirrel-tracker'  # eg. 'ieor-tools-for-analytics:asia-east1:adopt'
+    PGDATABASE: 'postgres'
+    PGUSER: 'postgres'
+    PGPASSWORD: 'GoOImrNpeAL4o94v'
+    SECRET_KEY: 'django-insecure-v56hs_p-k25iyop99i2778u^a=11qdnpsme828i+lvxlsyfp^k'
+    GS_BUCKET_NAME: 'smiling-audio-307012.appspot.com'  # eg. 'ieor-tools-for-analytics.appspot.com'
+    GOOGLE_APPLICATION_CREDENTIALS: 'service-account-key.json'  # eg. 'service-account-key.json'       
