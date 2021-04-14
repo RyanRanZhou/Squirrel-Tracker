@@ -67,37 +67,6 @@
             {{ climb_stats }}%</div>
     </div>
 
-    <nav class="navbar navbar-light bg-light">
-        <span class="navbar-brand mb-0 h1">Above Ground Sighter Measurement Stats</span>
-    </nav>
-    <div id="main"></div>
-
-    <script>
-        var chartDom = document.getElementById('main');
-        var myChartContainer = function () {
-            chartDom.style.width = window.innerWidth + 'px';
-            chartDom.style.height = window.innerWidth * 0.2 + 'px';
-        };
-        myChartContainer();
-        var myChart = echarts.init(chartDom);
-        var option;
-
-        option = {
-            xAxis: {
-                type: 'value'
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [{
-                data: JSON.parse("{{ above_ground_stats }}"),
-                type: 'line',
-                smooth: true
-            }]
-        };
-
-        myChart.setOption(option);
-    </script>
 
     <nav class="navbar navbar-light bg-light">
         <span class="navbar-brand mb-0 h1">Hectare Stats</span>
