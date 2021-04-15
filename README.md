@@ -41,11 +41,11 @@ The file path should be specified at the command line after the name of the mana
 
 ## Group:
 
- Project Group 17
+ Project Group 17, Section 1
  
  Ran Zhou UNI: rz2527
  
  Jin Shang UNI: js5781
 ## UNIs:
  
- UNIs: [rz2527,js5781]
+ UNIs: [rz2527, js5781]
