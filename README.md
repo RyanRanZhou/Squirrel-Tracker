@@ -45,7 +45,7 @@ The file path should be specified at the command line after the name of the mana
  
  Ran Zhou UNI: rz2527
  
- Jin Shang UNI:
+ Jin Shang UNI: js5781
 ## UNIs:
  
- UNIs: [rz2527,]
+ UNIs: [rz2527,js5781]
